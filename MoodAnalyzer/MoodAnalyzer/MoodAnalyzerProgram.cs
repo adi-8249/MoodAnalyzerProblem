@@ -17,11 +17,23 @@ namespace MoodAnalyzer
         }
         public string Analyzer()
         {
-            if (this.message.Contains("sad"))
+            try //this block will test for exception
             {
-                return "sad";
+                if (this.message.Contains("sad"))
+                {
+                    return "sad";
+                }
+                if (this.message.Contains("Happy"))
+                {
+                    return "Happy";
+                }
+                if (this.message.Contains(null))
+                {
+                    return "Happy";
+                }
             }
-            if (this.message.Contains("Happy"))
+
+            catch // this block will catch the exception if there
             {
                 return "Happy";
             }

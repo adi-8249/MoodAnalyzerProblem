@@ -6,7 +6,8 @@ namespace MoodAnalyzerTest.Test
 {
     public class Tests
     {
-        [Test]
+
+        [Test]// Test case 1.1
         public void method_Returns_sad_mood()
         {
             //Arrange
@@ -16,7 +17,7 @@ namespace MoodAnalyzerTest.Test
             //Assert
             Assert.AreEqual(expeted, analyzer.Analyzer());
         }
-        [Test]
+        [Test]//Test case 1.2
         public void Method_Returns_Happy_mood()
         {
             //Arrange
@@ -25,6 +26,16 @@ namespace MoodAnalyzerTest.Test
             MoodAnalyzerProgram analyzer = new MoodAnalyzerProgram("I am in Happy Mood");
             //Assert
             Assert.AreEqual(expected, analyzer.Analyzer());
+        }
+        [Test]//Test case 2.1
+        public void Null_Mood_Return_Happy()
+        {
+            //Arrange
+            string expected = "Happy";
+            //Act
+            MoodAnalyzerProgram moodAnalyser = new MoodAnalyzerProgram(null);
+            //Assert
+            Assert.AreEqual(expected, moodAnalyser.Analyzer());
         }
     }
 }
