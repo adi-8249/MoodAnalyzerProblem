@@ -16,5 +16,15 @@ namespace MoodAnalyzerTest.Test
             //Assert
             Assert.AreEqual(expeted, analyzer.Analyzer());
         }
+        [Test]
+        public void Method_Returns_Happy_mood()
+        {
+            //Arrange
+            string expected = "Happy";
+            //Act
+            MoodAnalyzerProgram analyzer = new MoodAnalyzerProgram("I am in Happy Mood");
+            //Assert
+            Assert.AreEqual(expected, analyzer.Analyzer());
+        }
     }
 }
