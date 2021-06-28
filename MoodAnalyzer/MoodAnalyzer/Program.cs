@@ -13,7 +13,7 @@ namespace MoodAnalyzer
             Console.WriteLine(analyzer.Analyzer());
             //UC2- exception handling
             MoodAnalyzerProgram moodAnalyzer = new MoodAnalyzerProgram("");
-            Console.WriteLine(moodAnalyzer.Analyzer()); 
+            Console.WriteLine(moodAnalyzer.Analyzer());
         }
     }
 }

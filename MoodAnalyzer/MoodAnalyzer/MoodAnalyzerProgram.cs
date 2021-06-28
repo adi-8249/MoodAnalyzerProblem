@@ -17,27 +17,29 @@ namespace MoodAnalyzer
         }
         public string Analyzer()
         {
-            try //this block will test for exception
+            try 
             {
-                if (this.message.Contains("sad"))
+                if (this.message.Equals(string.Empty))
                 {
-                    return "sad";
+                    throw new MoodAnalyserCustomException(MoodAnalyserCustomException.ExceptionType.EMPTY_MESSAGE, "Mood should not Empty");
                 }
-                if (this.message.Contains("Happy"))
+                if (this.message.Contains("Sad")) //Contains is inbuilt method
                 {
-                    return "Happy";
+                    return "Sad";
                 }
-                if (this.message.Contains(null))
+                else
                 {
                     return "Happy";
                 }
             }
-
-            catch // this block will catch the exception if there
+            catch (NullReferenceException)
             {
-                return "Happy";
+                throw new MoodAnalyserCustomException(MoodAnalyserCustomException.ExceptionType.NULL_MESSAGE, "Mood should not null");
             }
-            return null;
+            catch (MoodAnalyserCustomException exception)
+            {
+                return exception.Message;
+            }
         }
     }
 }
