@@ -1,7 +1,9 @@
 using MoodAnalyzer;
 using NUnit.Framework;
+using System;
+using System.Reflection;
 using System.Runtime.Serialization;
-
+using System.Text.RegularExpressions;
 
 namespace MoodAnalyzerTest.Test
 {
@@ -64,6 +66,53 @@ namespace MoodAnalyzerTest.Test
             string actual = moodAnalyser.Analyzer();
             //Assert
             Assert.AreEqual(expected, actual);
+        }
+        [Test]//TestCase-4.1 
+        public void GivenMoodAnalyserClassName_WhenAnalse_ShouldReturnObject()
+        {
+            //Arrange
+            string message = null;
+            //Act
+            object expected = new MoodAnalyzerProgram(message);
+            object resultobj = MoodAnalyzerFactory.CreateMoodAnalyse("MoodAnalyzer.MoodAnalyzer", "MoodAnalyser");
+            //Assert
+            expected.Equals(resultobj);
+        }
+        [Test]
+        //TC4.2:-Given class Name when improper should throw MoodAnalyserCustomException
+        public void Given_Improper_Class_Name_Should_Throw_MoodAnalyserCustomException_Indicating_No_Such_Class()
+        {
+            try
+            {
+                //Arrange
+                string className = "WrongNamespace.MoodAnalyser";
+                string constructorName = "MoodAnalyser";
+                //Act
+                object resultObj = MoodAnalyzerFactory.CreateMoodAnalyse(className, constructorName);
+            }
+            catch (MoodAnalyserCustomException ex)
+            {
+                //Assert
+                Assert.AreEqual("Class Not Found", ex.Message);
+            }
+        }
+        [Test]
+        //TC4.3:-Given class when constructor improper should throw MoodAnalysisException
+        public void Given_Improper_Constructor_Name_Should_Throw_MoodAnalyserCustomException_Indicating_No_Such_Constuctor()
+        {
+            try
+            {
+                //Arrange
+                string className = "MoodAnalyzer.MoodAnalyser";
+                string constructorName = "WrongConstructorName";
+                //Act
+                object resultObj = MoodAnalyzerFactory.CreateMoodAnalyse(className, constructorName);
+            }
+            catch (MoodAnalyserCustomException ex)
+            {
+                //Assert
+                Assert.AreEqual("Constructor is not Found", ex.Message);
+            }
         }
     }
 }
